@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1 align='center'>Willkommen bei Thomas' Autovermietung</h1>
+        <h1 align='center'>Willkommen bei der Autovermietung</h1>
         <a href="menu.jsp"><img width="800" src="https://i.makeagif.com/media/5-13-2023/uWpM62.gif" align="center"></a>
     </body>
 </html>

@@ -18,8 +18,8 @@ import javax.persistence.*;
 @WebService
 @Stateless
 public class AutovermietungSessionBean implements AutovermietungSessionBeanRemote {
-@PersistenceContext(unitName="AutovermietungPU")
-   private EntityManager entityManager;    
+    @PersistenceContext(unitName="AutovermietungPU")
+    private EntityManager entityManager;    
 
     public AutovermietungSessionBean(){
     }
@@ -36,6 +36,12 @@ public class AutovermietungSessionBean implements AutovermietungSessionBeanRemot
     
     public void loescheAuto(int i){
         entityManager.remove(entityManager.find(Auto.class, i));
+    }
+    
+    public void aendereAuto(int i, Auto auto){
+        Auto autoAlt=entityManager.find(Auto.class, i);
+        autoAlt=auto;
+        entityManager.merge(autoAlt);
     }
     
     public List<Auto> getAutos(){
