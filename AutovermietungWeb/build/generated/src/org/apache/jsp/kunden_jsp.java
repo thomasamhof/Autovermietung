@@ -3,8 +3,13 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import com.autovermietung.*;
+import java.io.*;
+import java.util.*;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
-public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class kunden_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -44,7 +49,37 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
+ 
+ Properties props; 
+ InitialContext ctx=null; 
+  
+ props = new Properties(); 
+ try { 
+ ctx = new InitialContext(props); 
+ } catch (NamingException ex) { 
+ ex.printStackTrace(); 
+ } 
+    
+    AutovermietungSessionBeanRemote bean=(AutovermietungSessionBeanRemote)ctx.lookup("AutovermietungSessionBean/remote");
+    String name=request.getParameter("text");
+    String button=request.getParameter("button");
+    try {
+          if (!name.equals("Neuer Kunde") && name.matches("[a-zA-Z ]+") && button.equals("anlegen")) {
+            Kunde kunde=new Kunde();
+            kunde.setName(name);
+            bean.addKunde(kunde);
+        }  
+        } catch (NullPointerException npe) {
+        }
+    
+    
+    
+    List<Kunde> liste;
+    liste=bean.getKunden();
+ 
+      out.write("\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"AutovermietungCSS.css\">\r\n");
@@ -52,9 +87,26 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <title>JSP Page</title>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
-      out.write("        <h1 align='center'>Willkommen bei der Autovermietung</h1>\r\n");
-      out.write("        <a class=\"startbild\" href=\"menu.jsp\"><img width=\"800\" src=\"https://i.makeagif.com/media/5-13-2023/uWpM62.gif\"></a>\r\n");
+      out.write("        <h1>Kundenliste</h1>\r\n");
+      out.write("        <ul>      \r\n");
+      out.write("       ");
+ out.println("Anzahl an Kunden: "+liste.size());
+           for (Kunde x : liste) { 
+      out.write("\r\n");
+      out.write("            <li>");
+      out.print( x );
+      out.write("</li>       \r\n");
+      out.write("             ");
+  } 
+      out.write("  \r\n");
+      out.write("   </ul>\r\n");
+      out.write("   <br><br>\r\n");
+      out.write("   <form action=\"kunden.jsp\" method=\"get\">\r\n");
+      out.write("       <input type=\"text\" name=\"text\" value=\"Neuer Kunde\">\r\n");
+      out.write("       <input type=\"submit\" name=\"button\" value=\"anlegen\">\r\n");
+      out.write("   </form>\r\n");
       out.write("    </body>\r\n");
+      out.write("    <a href=\"menu.jsp\">zum Menü</a>\r\n");
       out.write("</html>\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){

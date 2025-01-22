@@ -1,0 +1,33 @@
+
+body {
+  background: #8d99ae;
+  color: #2b2d42;
+
+}
+
+.startbild {
+    display: block;
+    position: relative;
+}
+
+.startbild img{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px;
+}
+
+
+h1,h2,h3 {
+    font-family: Courier New;
+}
+
+input,
+select
+{
+    color: inherit;
+}
+
+a {
+   color: #003459;
+}

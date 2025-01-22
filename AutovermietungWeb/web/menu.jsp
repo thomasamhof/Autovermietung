@@ -43,10 +43,19 @@
 
 <html>
     <head>
+        <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
+        <h1>Autoliste</h1>
+        <form action="menu.jsp" method="get">
+             <input type="text" name="name" value="Neues Auto">
+             <input type="text" name="farbe" value="Farbe">
+             <input type="submit" name="button" value="anlegen">
+            </form>
+        
+        
         <table>
     
             <tr><th><%= ("Autoliste Anzahl: "+liste.size())%></th></tr><ul>
@@ -54,15 +63,8 @@
             <tr> <li><%= x %></li></tr>       
              <%  } %>
         </ul></table><br><br>
-            <form action="menu.jsp" method="get">
-             <input type="text" name="name" value="Neues Auto">
-             <input type="text" name="farbe" value="Farbe">
-             <input type="submit" name="button" value="anlegen">
-            </form>
-        <br>
-        <br>
-        <table>
-            <tr>
+            <h2>Auto verleihen</h2>
+
                 <form action="autosBearbeiten.jsp" method="get">
                 <select name="autos"> 
                     <% for (Auto x:liste) { %>
@@ -73,8 +75,8 @@
                     <input type="submit" value="verleihen" name="button">
                     <input type="submit" value="loeschen" name="button" formaction="menu.jsp">
                 </form>
-           </tr><br>
-            <tr> <a href="kunden.jsp">weiter zu den Kunden</a></tr>
-            </table>
+           <br>
+ <a href="kunden.jsp">weiter zu den Kunden</a>
+
     </body>
 </html>

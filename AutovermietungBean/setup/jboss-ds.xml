@@ -4,7 +4,7 @@
       <jndi-name>PostgresDS</jndi-name>
       <connection-url>jdbc:postgresql://localhost:5432/postgres</connection-url>
       <driver-class>org.postgresql.driver</driver-class>
-      <user-name>cotsc</user-name>
+      <user-name>TAmhof</user-name>
       <password></password>
       <min-pool-size>5</min-pool-size>
       <max-pool-size>20</max-pool-size>

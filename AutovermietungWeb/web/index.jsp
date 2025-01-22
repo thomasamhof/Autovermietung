@@ -8,11 +8,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
         <h1 align='center'>Willkommen bei der Autovermietung</h1>
-        <a href="menu.jsp"><img width="800" src="https://i.makeagif.com/media/5-13-2023/uWpM62.gif" align="center"></a>
+        <a class="startbild" href="menu.jsp"><img width="800" src="https://i.makeagif.com/media/5-13-2023/uWpM62.gif"></a>
     </body>
 </html>

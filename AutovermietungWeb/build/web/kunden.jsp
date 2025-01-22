@@ -37,6 +37,7 @@
  %>
 <html>
     <head>
+        <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
@@ -54,5 +55,6 @@
        <input type="submit" name="button" value="anlegen">
    </form>
     </body>
+    <br>
     <a href="menu.jsp">zum Menü</a>
 </html>
