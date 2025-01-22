@@ -16,4 +16,5 @@ public interface AutovermietungSessionBeanRemote {
     Auto getAuto(int i);
     List getKunden();
     Kunde getKunde(int i);
+    void aendereAuto(int i, Auto auto);
 }
