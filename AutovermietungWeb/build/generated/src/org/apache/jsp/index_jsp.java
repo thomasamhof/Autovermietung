@@ -3,6 +3,11 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import com.autovermietung.*;
+import java.io.*;
+import java.util.*;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -44,10 +49,28 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
+ 
+    Properties props; 
+    InitialContext ctx=null; 
+    props = new Properties(); 
+    try { 
+        ctx = new InitialContext(props); 
+    } catch (NamingException ex) { 
+        ex.printStackTrace(); 
+    } 
+    AutovermietungSessionBeanRemote bean=(AutovermietungSessionBeanRemote)ctx.lookup("AutovermietungSessionBean/remote");
+    
+    if (bean.getKunde(1)==null && bean.getKunden().size()==0) {
+        Kunde kunde=new Kunde();
+        kunde.setName("nicht verliehen");
+            bean.addKunde(kunde);
+        }
+    ;
+      out.write("\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"AutovermietungCSS.css\">\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <title>JSP Page</title>\r\n");

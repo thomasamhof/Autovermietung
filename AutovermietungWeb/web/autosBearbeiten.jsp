@@ -17,16 +17,15 @@
     } catch (NamingException ex) { 
             ex.printStackTrace(); 
     } 
-    
+    int autoId=0;
     AutovermietungSessionBeanRemote bean=(AutovermietungSessionBeanRemote)ctx.lookup("AutovermietungSessionBean/remote");
-    int autoId=Integer.parseInt(request.getParameter("autos"));
+    autoId=Integer.parseInt(request.getParameter("auswahl")); 
     String button=request.getParameter("button");
      Auto auto=new Auto();
      auto=bean.getAuto(autoId); 
        %>
 <html>
     <head>
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -38,7 +37,7 @@
             <table>
                 <tr><td>bisherige Bezeichnung</td><td><input type="text" name="name" value="<%=auto.getBez()%>"></td></tr>
             <tr><td>bisherige Farbe</td><td><input type="text" name="farbe" value="<%=auto.getFarbe()%>"></td></tr>
-            <tr><td><input type="submit" class="btn-primary" name="button" value="aendern"></td></tr>
+            <tr><td><input type="submit" class="btn-primary" name="button" value="bearbeiten"></td></tr>
             </table>
             <input hidden="true" type="text" name="autoId" value="<%=autoId+""%>">
         </form> 

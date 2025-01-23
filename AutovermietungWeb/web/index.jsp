@@ -5,10 +5,27 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.autovermietung.*,java.io.*,java.util.*, javax.naming.InitialContext,javax.naming.NamingException"%>
 <!DOCTYPE html>
+<% 
+    Properties props; 
+    InitialContext ctx=null; 
+    props = new Properties(); 
+    try { 
+        ctx = new InitialContext(props); 
+    } catch (NamingException ex) { 
+        ex.printStackTrace(); 
+    } 
+    AutovermietungSessionBeanRemote bean=(AutovermietungSessionBeanRemote)ctx.lookup("AutovermietungSessionBean/remote");
+    
+    if (bean.getKunde(1)==null && bean.getKunden().size()==0) {
+        Kunde kunde=new Kunde();
+        kunde.setName("nicht verliehen");
+            bean.addKunde(kunde);
+        }
+    ;%>
 <html>
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>

@@ -29,25 +29,25 @@
             ausgabe= bean.getAuto(autoId).getBez()+" an "+kunde.getName()+" verliehen";
 
 
-    } else if (button.equals("aendern")) {
+    } else if (button.equals("bearbeiten")) {
             Auto auto=bean.getAuto(autoId);
             auto.setBez(request.getParameter("name"));
             auto.setFarbe(request.getParameter("farbe"));
             bean.aendereAuto(autoId, auto);
-            ausgabe = auto.getBez()+" in der Farbe "+auto.getFarbe()+"<br>Änderungen übernommen";
+            ausgabe = auto.getBez()+" in der Farbe "+auto.getFarbe();
         }
     
 
 %>
 <html>
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <div><%=ausgabe%></div>
+        <h2>Änderungen</h2>
+        <div class="AenderungenZeigen"><%=ausgabe%></div>
         <br>
         <a href="menu.jsp">zurück zum Menü</a>
     </body>

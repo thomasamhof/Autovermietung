@@ -65,8 +65,8 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
     String farbe=request.getParameter("farbe");
     String button=request.getParameter("button");
     try {
-          if (button.equals("loeschen")){
-              bean.loescheAuto(Integer.parseInt(request.getParameter("autos")));
+          if (button.equals("entfernen")){
+              bean.loescheAuto(Integer.parseInt(request.getParameter("auswahl")));
           } else if (!name.equals("Neues Auto") && name.matches("[a-zA-Z0-9 ]+") && !farbe.equals("Farbe") && farbe.matches("[a-zA-Z ]+") && button.equals("anlegen")) {
             Auto auto=new Auto();
             auto.setBez(name);
@@ -83,7 +83,7 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">\r\n");
+      out.write("       \r\n");
       out.write("        <link rel=\"stylesheet\" href=\"AutovermietungCSS.css\">\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <title>JSP Page</title>\r\n");
@@ -99,8 +99,10 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <h2>");
       out.print( (liste.size())+" Autos in der Vermietung");
       out.write("</h2>\r\n");
-      out.write("        <table border=\"1\">\r\n");
-      out.write("            <th width=\"40%\">Autobezeichnung</th><th width=\"15%\">Farbe</th><th width=\"35%\">vermietet an</th><th width=\"10%\">Auto ID</th>\r\n");
+      out.write("        <form action=\"autosBearbeiten.jsp\" method=\"post\">\r\n");
+      out.write("            <table border=\"1\" class=\"vermieteteAutos\">\r\n");
+      out.write("            \r\n");
+      out.write("            <th width=\"35%\">Autobezeichnung</th><th width=\"15%\">Farbe</th><th width=\"30%\">vermietet an</th><th width=\"10%\">Auto ID</th><th width=\"10%\">Auswahl</th>\r\n");
       out.write("          ");
  for (Auto x : liste) { 
       out.write("\r\n");
@@ -113,35 +115,20 @@ public final class menu_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.print( x.getKunde() );
       out.write("</td><td>");
       out.print( x.getId() );
-      out.write("</td>  \r\n");
+      out.write("</td><td><input type=\"radio\" name=\"auswahl\" value=\"");
+      out.print( x.getId() );
+      out.write("\" required></td>  \r\n");
       out.write("            </tr>       \r\n");
       out.write("             ");
   } 
       out.write("\r\n");
       out.write("        </table>\r\n");
+      out.write("        <br>\r\n");
+      out.write("        <input type=\"submit\" class=\"btn-primary\" value=\"bearbeiten\" name=\"button\">\r\n");
+      out.write("        <input type=\"submit\" class=\"btn-primary\" value=\"verleihen\" name=\"button\">\r\n");
+      out.write("        <input type=\"submit\" class=\"btn-danger\" value=\"entfernen\" name=\"button\" formaction=\"menu.jsp\">\r\n");
+      out.write("        </form>\r\n");
       out.write("        <br><br>\r\n");
-      out.write("            <h2>Auto verleihen</h2>\r\n");
-      out.write("\r\n");
-      out.write("                <form action=\"autosBearbeiten.jsp\" method=\"get\">\r\n");
-      out.write("                <select name=\"autos\"> \r\n");
-      out.write("                    ");
- for (Auto x:liste) { 
-      out.write("\r\n");
-      out.write("                    <option value=\"");
-      out.print(x.getId());
-      out.write('"');
-      out.write('>');
-      out.print( x );
-      out.write("</option>     \r\n");
-      out.write("                    ");
-  } 
-      out.write("   \r\n");
-      out.write("                    </select>\r\n");
-      out.write("                    <input type=\"submit\" class=\"btn-primary\" value=\"bearbeiten\" name=\"button\">\r\n");
-      out.write("                    <input type=\"submit\" class=\"btn-primary\" value=\"verleihen\" name=\"button\">\r\n");
-      out.write("                    <input type=\"submit\" class=\"btn-danger\" value=\"loeschen\" name=\"button\" formaction=\"menu.jsp\">\r\n");
-      out.write("                </form>\r\n");
-      out.write("           <br>\r\n");
       out.write("        <a href=\"kunden.jsp\">weiter zu den Kunden</a>\r\n");
       out.write("    </body>\r\n");
       out.write("</html>\r\n");

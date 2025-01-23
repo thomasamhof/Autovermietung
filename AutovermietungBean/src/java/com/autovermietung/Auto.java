@@ -43,7 +43,7 @@ public class Auto implements Serializable {
         this.Farbe = Farbe;
     }
     
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}
       , fetch = FetchType.EAGER)
     public Kunde getKunde() {
         return kunde;
