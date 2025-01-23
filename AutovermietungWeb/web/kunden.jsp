@@ -35,6 +35,7 @@
  %>
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -43,7 +44,7 @@
         <h1>Kundenliste</h1>
         <form action="kunden.jsp" method="get">
             <input type="text" name="text" value="Neuer Kunde">
-            <input type="submit" name="button" value="anlegen">
+            <input class="btn-primary" type="submit" name="button" value="anlegen">
         </form>
         <br>
         <table border="1">

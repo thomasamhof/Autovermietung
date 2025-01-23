@@ -1,8 +1,9 @@
 
 body {
-  background: #8d99ae;
-  color: #2b2d42;
-
+  background: #cdd7d6;
+  color: #102542;
+  height:100vh;
+  padding: 20px;
 }
 
 .startbild {
@@ -20,6 +21,7 @@ body {
 
 h1,h2,h3 {
     font-family: Courier New;
+    font-weight: bold;
 }
 
 input,
@@ -30,9 +32,19 @@ select
 
 a {
    color: #003459;
+   text-decoration: underline;
 }
 
-input[type="submit"]:hover {
-    background-color: red;
-    transition:background-color 1s ease-in-out;
+input{
+    border-radius: 4px;
+/*    background-color: red;
+    transition:background-color 1s ease-in-out;*/
+}
+
+table.vermieteteAutos {
+    width: 100%;
+}
+
+th, td {
+    padding: 4px;
 }

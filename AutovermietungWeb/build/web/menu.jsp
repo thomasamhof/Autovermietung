@@ -38,6 +38,7 @@
 
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -47,12 +48,12 @@
         <form action="menu.jsp" method="get">
              <input type="text" name="name" value="Neues Auto">
              <input type="text" name="farbe" value="Farbe">
-             <input type="submit" name="button" value="anlegen">
+             <input type="submit" class="btn-primary" name="button" value="anlegen">
         </form>
         <br>
         <h2><%= (liste.size())+" Autos in der Vermietung"%></h2>
-        <table border="1">
-            <th width="250">Autobezeichnung</th><th width="75">Farbe</th><th width="200">vermietet an</th><th>Auto ID</th>
+        <table border="1" class="vermieteteAutos">
+            <th width="40%">Autobezeichnung</th><th width="15%">Farbe</th><th width="35%">vermietet an</th><th width="10%">Auto ID</th>
           <% for (Auto x : liste) { %>
             <tr>
                 <td><%= x.getBez() %></td><td><%= x.getFarbe() %></td><td><%= x.getKunde() %></td><td><%= x.getId() %></td>  
@@ -68,9 +69,9 @@
                     <option value="<%=x.getId()%>"><%= x %></option>     
                     <%  } %>   
                     </select>
-                    <input type="submit" value="bearbeiten" name="button">
-                    <input type="submit" value="verleihen" name="button">
-                    <input type="submit" value="loeschen" name="button" formaction="menu.jsp">
+                    <input type="submit" class="btn-primary" value="bearbeiten" name="button">
+                    <input type="submit" class="btn-primary" value="verleihen" name="button">
+                    <input type="submit" class="btn-danger" value="loeschen" name="button" formaction="menu.jsp">
                 </form>
            <br>
         <a href="kunden.jsp">weiter zu den Kunden</a>

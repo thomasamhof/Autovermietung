@@ -9,7 +9,7 @@ import java.util.*;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public final class kunden_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class autosBearbeiten_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -51,65 +51,90 @@ public final class kunden_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
- 
-    Properties props; 
-    InitialContext ctx=null; 
+      out.write("\r\n");
+      out.write("   ");
+ Properties props; 
+    InitialContext ctx=null;
   
     props = new Properties(); 
     try { 
         ctx = new InitialContext(props); 
     } catch (NamingException ex) { 
-        ex.printStackTrace(); 
+            ex.printStackTrace(); 
     } 
     
     AutovermietungSessionBeanRemote bean=(AutovermietungSessionBeanRemote)ctx.lookup("AutovermietungSessionBean/remote");
-    String name=request.getParameter("text");
+    int autoId=Integer.parseInt(request.getParameter("autos"));
     String button=request.getParameter("button");
-    try {
-          if (!name.equals("Neuer Kunde") && name.matches("[a-zA-Z ]+") && button.equals("anlegen")){
-                Kunde kunde=new Kunde();
-                kunde.setName(name);
-                bean.addKunde(kunde); 
-            }
-    } catch (NullPointerException npe) {
-        }
-
-    List<Kunde> liste;
-    liste=bean.getKunden();
- 
+     Auto auto=new Auto();
+     auto=bean.getAuto(autoId); 
+       
       out.write("\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">\r\n");
+      out.write("         <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"AutovermietungCSS.css\">\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("        <title>JSP Page</title>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
-      out.write("        <h1>Kundenliste</h1>\r\n");
-      out.write("        <form action=\"kunden.jsp\" method=\"get\">\r\n");
-      out.write("            <input type=\"text\" name=\"text\" value=\"Neuer Kunde\">\r\n");
-      out.write("            <input class=\"btn-primary\" type=\"submit\" name=\"button\" value=\"anlegen\">\r\n");
-      out.write("        </form>\r\n");
-      out.write("        <br>\r\n");
-      out.write("        <table border=\"1\">\r\n");
-      out.write("            <th width=\"150\">Name</th><th width=\"100\">Kdnr</th>\r\n");
       out.write("        ");
- for (Kunde x : liste) { 
+ if (button.equals("bearbeiten")) { 
       out.write("\r\n");
-      out.write("            <tr><td>");
-      out.print( x.getName() );
-      out.write("</td><td>");
-      out.print( x.getid() );
-      out.write("</td></tr>     \r\n");
+      out.write("        <h2>Auto bearbeiten</h2>\r\n");
+      out.write("        <form action=\"verarbeiten.jsp\" method=\"post\">\r\n");
+      out.write("            <table>\r\n");
+      out.write("                <tr><td>bisherige Bezeichnung</td><td><input type=\"text\" name=\"name\" value=\"");
+      out.print(auto.getBez());
+      out.write("\"></td></tr>\r\n");
+      out.write("            <tr><td>bisherige Farbe</td><td><input type=\"text\" name=\"farbe\" value=\"");
+      out.print(auto.getFarbe());
+      out.write("\"></td></tr>\r\n");
+      out.write("            <tr><td><input type=\"submit\" class=\"btn-primary\" name=\"button\" value=\"aendern\"></td></tr>\r\n");
+      out.write("            </table>\r\n");
+      out.write("            <input hidden=\"true\" type=\"text\" name=\"autoId\" value=\"");
+      out.print(autoId+"");
+      out.write("\">\r\n");
+      out.write("        </form> \r\n");
+      out.write("        ");
+ } else if (button.equals("verleihen")) {
+      out.write("\r\n");
+      out.write("            <h2>An wen soll dieses Auto vermietet werden</h2>\r\n");
+      out.write("        <form action=\"verarbeiten.jsp\" method=\"post\"> \r\n");
+      out.write("            <table>\r\n");
+      out.write("                <tr><td>");
+      out.print(auto);
+      out.write("</td></tr>\r\n");
+      out.write("                <tr><td><select name=\"kunde\">\r\n");
+      out.write("            ");
+ for (Object x : bean.getKunden()) { 
+      out.write("\r\n");
+      out.write("            <option value=\"");
+      out.print(((Kunde)x).getid());
+      out.write('"');
+      out.write('>');
+      out.print( (Kunde)x );
+      out.write("</option>       \r\n");
       out.write("             ");
   } 
-      out.write("  \r\n");
-      out.write("        </table>\r\n");
-      out.write("        <br>\r\n");
-      out.write("        <a href=\"menu.jsp\">zum Menü</a>\r\n");
+      out.write("\r\n");
+      out.write("            </select>\r\n");
+      out.write("            <input type=\"submit\" class=\"btn-primary\" name=\"button\" value=\"verleihen\"></td></tr>\r\n");
+      out.write("            </table>\r\n");
+      out.write("             <input hidden=\"true\" type=\"text\" name=\"autoId\" value=\"");
+      out.print(autoId+"");
+      out.write("\">\r\n");
+      out.write("        </form>\r\n");
+      out.write("            ");
+ } 
+      out.write("     \r\n");
       out.write("    </body>\r\n");
-      out.write("</html>\r\n");
+      out.write("</html>  \r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

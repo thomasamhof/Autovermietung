@@ -26,29 +26,35 @@
        %>
 <html>
     <head>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="AutovermietungCSS.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
         <% if (button.equals("bearbeiten")) { %>
+        <h2>Auto bearbeiten</h2>
         <form action="verarbeiten.jsp" method="post">
-            bisherige Bezeichnung: <input type="text" name="name" value="<%=auto.getBez()%>"><br>
-            bisherige Farbe: <input type="text" name="farbe" value="<%=auto.getFarbe()%>"><br>
+            <table>
+                <tr><td>bisherige Bezeichnung</td><td><input type="text" name="name" value="<%=auto.getBez()%>"></td></tr>
+            <tr><td>bisherige Farbe</td><td><input type="text" name="farbe" value="<%=auto.getFarbe()%>"></td></tr>
+            <tr><td><input type="submit" class="btn-primary" name="button" value="aendern"></td></tr>
+            </table>
             <input hidden="true" type="text" name="autoId" value="<%=autoId+""%>">
-            <input type="submit" name="button" value="aendern">
         </form> 
         <% } else if (button.equals("verleihen")) {%>
-            <div>An wen soll dieses Auto vermietet werden</div>
-        <div><%=auto%></div>
-        <form action="verarbeiten.jsp" method="post">
-            <select name="kunde">
+            <h2>An wen soll dieses Auto vermietet werden</h2>
+        <form action="verarbeiten.jsp" method="post"> 
+            <table>
+                <tr><td><%=auto%></td></tr>
+                <tr><td><select name="kunde">
             <% for (Object x : bean.getKunden()) { %>
             <option value="<%=((Kunde)x).getid()%>"><%= (Kunde)x %></option>       
              <%  } %>
             </select>
-            <input hidden="true" type="text" name="autoId" value="<%=autoId+""%>">
-            <input type="submit" name="button" value="verleihen">
+            <input type="submit" class="btn-primary" name="button" value="verleihen"></td></tr>
+            </table>
+             <input hidden="true" type="text" name="autoId" value="<%=autoId+""%>">
         </form>
             <% } %>     
     </body>
